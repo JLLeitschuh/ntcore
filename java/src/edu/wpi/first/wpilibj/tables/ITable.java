@@ -1,6 +1,5 @@
 package edu.wpi.first.wpilibj.tables;
 
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 
@@ -143,7 +142,7 @@ public interface ITable {
    * @param value the value that will be assigned
    * @return False if the table key already exists with a different type
    */
-  public boolean putNumber(String key, double value);
+  public boolean putNumber(String key, Number value);
   /**
    * @param key the key to look up
    * @return the value associated with the given key
@@ -157,7 +156,7 @@ public interface ITable {
    * @return the value associated with the given key or the given default value
    * if there is no value associated with the key
    */
-  public double getNumber(String key, double defaultValue);
+  public double getNumber(String key, Number defaultValue);
 
   /**
    * Put a string in the table
@@ -252,7 +251,7 @@ public interface ITable {
    * @param value the value that will be assigned
    * @return False if the table key already exists with a different type
    */
-  public boolean putNumberArray(String key, Double[] value);
+  public boolean putNumberArray(String key, Number[] value);
   /**
    * @param key the key to look up
    * @return the value associated with the given key
@@ -273,7 +272,7 @@ public interface ITable {
    * @return the value associated with the given key or the given default value
    * if there is no value associated with the key
    */
-  public Double[] getNumberArray(String key, Double[] defaultValue);
+  public Number[] getNumberArray(String key, Number[] defaultValue);
 
   /**
    * Put a string array in the table

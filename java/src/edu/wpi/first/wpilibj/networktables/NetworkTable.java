@@ -1,8 +1,11 @@
 package edu.wpi.first.wpilibj.networktables;
 
+import edu.wpi.first.wpilibj.networktables2.type.ArrayData;
+import edu.wpi.first.wpilibj.networktables2.type.BooleanArray;
+import edu.wpi.first.wpilibj.networktables2.type.NumberArray;
+import edu.wpi.first.wpilibj.networktables2.type.StringArray;
 import edu.wpi.first.wpilibj.tables.*;
-import edu.wpi.first.wpilibj.networktables2.type.*;
-import java.io.*;
+
 import java.util.*;
 
 /**
@@ -140,10 +143,10 @@ public class NetworkTable implements ITable, IRemote {
     return out;
   }
 
-  public static double[] toNative(Double[] arr) {
+  public static double[] toNative(Number[] arr) {
     double[] out = new double[arr.length];
     for (int i = 0; i < arr.length; i++)
-      out[i] = arr[i];
+      out[i] = arr[i].doubleValue();
     return out;
   }
 
@@ -458,8 +461,8 @@ public class NetworkTable implements ITable, IRemote {
    *            the value
    * @return False if the table key already exists with a different type
    */
-  public boolean putNumber(String key, double value) {
-    return NetworkTablesJNI.putDouble(path + PATH_SEPARATOR + key, value);
+  public boolean putNumber(String key, Number value) {
+    return NetworkTablesJNI.putDouble(path + PATH_SEPARATOR + key, value.doubleValue());
   }
 
   /**
@@ -485,8 +488,8 @@ public class NetworkTable implements ITable, IRemote {
    *            the default value if the key is null
    * @return the key
    */
-  public double getNumber(String key, double defaultValue) {
-    return NetworkTablesJNI.getDouble(path + PATH_SEPARATOR + key, defaultValue);
+  public double getNumber(String key, Number defaultValue) {
+    return NetworkTablesJNI.getDouble(path + PATH_SEPARATOR + key, defaultValue.doubleValue());
   }
 
   /**
@@ -674,7 +677,7 @@ public class NetworkTable implements ITable, IRemote {
    *            the value
    * @return False if the table key already exists with a different type
    */
-  public boolean putNumberArray(String key, Double[] value) {
+  public boolean putNumberArray(String key, Number[] value) {
     return putNumberArray(key, toNative(value));
   }
 
@@ -715,7 +718,7 @@ public class NetworkTable implements ITable, IRemote {
    *            the default value if the key is null
    * @return the key
    */
-  public Double[] getNumberArray(String key, Double[] defaultValue) {
+  public Number[] getNumberArray(String key, Number[] defaultValue) {
     try {
       return fromNative(getNumberArray(key));
     } catch (TableKeyNotDefinedException e) {
